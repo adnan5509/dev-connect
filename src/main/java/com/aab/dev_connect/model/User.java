@@ -43,6 +43,9 @@ public class User implements UserDetails {
     private String bio;
     private String githubUrl;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Project> projects;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Authority> authorities;
 

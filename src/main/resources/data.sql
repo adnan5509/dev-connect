@@ -9,10 +9,10 @@ VALUES
 -- Insert Roles (Authority)
 INSERT INTO authority (username, authority)
 VALUES
-    (1, 'ROLE_PROJECT_OWNER'),
-    (2, 'ROLE_PROJECT_OWNER'),
-    (3, 'ROLE_TASK_OWNER'),
-    (4, 'ROLE_TASK_OWNER');
+    (1, 'ROLE_PROJECT_ADMIN'),
+    (2, 'ROLE_PROJECT_ADMIN'),
+    (3, 'ROLE_TASK_ASSIGNEE'),
+    (4, 'ROLE_TASK_ASSIGNEE');
 
 -- Insert Projects
 INSERT INTO projects (name, description, owner_id)
