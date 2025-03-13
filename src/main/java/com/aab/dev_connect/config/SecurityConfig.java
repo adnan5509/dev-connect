@@ -30,7 +30,7 @@ public class SecurityConfig {
 
                         // Task Endpoints
                         .requestMatchers(HttpMethod.POST, "/api/tasks").hasAnyRole("PROJECT_ADMIN", "TASK_ASSIGNEE") // Create task
-                        .requestMatchers(HttpMethod.GET, "/api/tasks/*").hasAnyRole("PROJECT_ADMIN", "TASK_ASSIGNEE") // View task
+                        .requestMatchers(HttpMethod.GET, "/api/tasks/*").hasRole("TASK_ASSIGNEE") // View task
                         .requestMatchers(HttpMethod.PUT, "/api/tasks/*").hasRole("TASK_ASSIGNEE") // Update task
                         .requestMatchers(HttpMethod.DELETE, "/api/tasks/*").hasRole("TASK_ASSIGNEE") // Delete task
 

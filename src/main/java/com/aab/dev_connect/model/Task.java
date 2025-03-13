@@ -41,8 +41,9 @@ public class Task {
     @JsonIgnore
     private Project project;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_to")
+    @JsonIgnore
     private User assigned_to;
 }
 
