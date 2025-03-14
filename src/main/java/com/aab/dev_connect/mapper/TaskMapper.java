@@ -40,6 +40,7 @@ public abstract class TaskMapper {
         }
     }
 
+    @Mapping(target = "ownerId", source = "owner.id")
     public abstract ProjectForTaskDataType MapProjectToProjectForTaskDataType(Project project);
 
 }

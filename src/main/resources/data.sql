@@ -8,7 +8,7 @@ VALUES
 
 
 -- Insert Authorities (Roles)
-INSERT INTO authority (username, authority)
+INSERT INTO authority (user_id, authority)
 VALUES
     (1, 'ROLE_PROJECT_ADMIN'),
     (2, 'ROLE_PROJECT_ADMIN'),

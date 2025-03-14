@@ -26,7 +26,7 @@ public class Authority implements GrantedAuthority {
     private String authority;
 
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Override

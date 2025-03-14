@@ -19,6 +19,7 @@ public interface ProjectMapper {
 
     @Lazy
     @Mapping(target = "tasks", expression = "java(TasksToTaskForProjectDataTypes(project.getTasks()))")
+    @Mapping(target = "ownerId", source = "owner.id")
     ProjectResponseDataType ProjectToProjectResponseDataType(Project project);
 
     TaskForProjectDataType TaskToTaskForProjectDataType(Task task);
