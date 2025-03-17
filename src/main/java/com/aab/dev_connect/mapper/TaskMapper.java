@@ -4,6 +4,7 @@ package com.aab.dev_connect.mapper;
 import com.aab.dev_connect.dto.ProjectForTaskDataType;
 import com.aab.dev_connect.dto.TaskRequestDataType;
 import com.aab.dev_connect.dto.TaskResponseDataType;
+import com.aab.dev_connect.dto.TaskUpdateRequestDataType;
 import com.aab.dev_connect.exception.ResourceNotFoundException;
 import com.aab.dev_connect.model.Project;
 import com.aab.dev_connect.model.Task;
@@ -42,5 +43,8 @@ public abstract class TaskMapper {
 
     @Mapping(target = "ownerId", source = "owner.id")
     public abstract ProjectForTaskDataType MapProjectToProjectForTaskDataType(Project project);
+
+    public abstract Task TaskUpdateRequestDataTypeToTask(TaskUpdateRequestDataType taskUpdateRequestDataType);
+
 
 }

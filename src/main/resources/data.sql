@@ -1,10 +1,10 @@
 -- Insert Users
-INSERT IGNORE INTO users (user_name, password, email, bio, github_url)
+INSERT IGNORE INTO users (username, password, email, bio, github_url)
 VALUES
-    ('adnan', '{bcrypt}$2a$12$ZM5blvwwWfukl5bEjxRgmejmqkk9DREfyLGtCGTPNwSw2yBpmTx7y', 'adnan@example.com', 'Software Engineer', 'https://github.com/adnan'),
-    ('zeshan', '{bcrypt}$2a$12$mYyLormHjOzQw2t/wuE5/uDMBu8jQSR3vM7LBihaaxaam.RZIvZPi', 'zeshan@example.com', 'Backend Developer', 'https://github.com/zeshan'),
-    ('kamran', '{bcrypt}$2a$12$RVTamjwXmlTp9hlduZJwM..u..KC65Ovqk/rAa/5nOnJ90no4rbti', 'kamran@example.com', 'Fullstack Developer', 'https://github.com/kamran'),
-    ('noor', '{bcrypt}$2a$12$HQpV5K2z5fRE35Lvk95Q4uWAcOKCYVxDVULbZ.WBzCsDYYB2n5QKK', 'noor@example.com', 'UI/UX Designer', 'https://github.com/noor');
+    ('adnan', '$2a$12$ZM5blvwwWfukl5bEjxRgmejmqkk9DREfyLGtCGTPNwSw2yBpmTx7y', 'adnan@example.com', 'Software Engineer', 'https://github.com/adnan'),
+    ('zeshan', '$2a$12$mYyLormHjOzQw2t/wuE5/uDMBu8jQSR3vM7LBihaaxaam.RZIvZPi', 'zeshan@example.com', 'Backend Developer', 'https://github.com/zeshan'),
+    ('kamran', '$2a$12$RVTamjwXmlTp9hlduZJwM..u..KC65Ovqk/rAa/5nOnJ90no4rbti', 'kamran@example.com', 'Fullstack Developer', 'https://github.com/kamran'),
+    ('noor', '$2a$12$HQpV5K2z5fRE35Lvk95Q4uWAcOKCYVxDVULbZ.WBzCsDYYB2n5QKK', 'noor@example.com', 'UI/UX Designer', 'https://github.com/noor');
 
 
 -- Insert Authorities (Roles)

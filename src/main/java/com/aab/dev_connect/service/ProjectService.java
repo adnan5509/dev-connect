@@ -30,4 +30,17 @@ public class ProjectService {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         return projectMapper.ProjectToProjectResponseDataType(project);
     }
+
+    public void deleteProject(final Long projectId) {
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        projectRepository.delete(project);
+    }
+
+    public ProjectResponseDataType updateProject(final Long projectId, final ProjectRequestDataType projectRequestData) {
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        project.setName(projectRequestData.getName());
+        project.setDescription(projectRequestData.getDescription());
+        Project updatedProject = projectRepository.save(project);
+        return projectMapper.ProjectToProjectResponseDataType(updatedProject);
+    }
 }

@@ -8,9 +8,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +50,24 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.FOUND).body(retrievedProject);
     }
 
+    @Operation(
+            summary = "Delete a project",
+            description = "Deletes the project identified by the provided projectId."
+    )
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+        projectService.deleteProject(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @Operation(
+            summary = "Update project information",
+            description = "Updates the information for a project identified by the provided projectId."
+    )
+    @PutMapping("/{id}")
+    public ResponseEntity<ProjectResponseDataType> updateProject(@PathVariable Long id, @RequestBody ProjectRequestDataType projectRequestData) {
+        ProjectResponseDataType updatedProject = projectService.updateProject(id, projectRequestData);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedProject);
+    }
 
 }
