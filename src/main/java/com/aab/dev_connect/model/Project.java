@@ -1,8 +1,11 @@
 package com.aab.dev_connect.model;
 
+import com.aab.dev_connect.enums.ProjectStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,6 +37,9 @@ public class Project {
     private String name;
 
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status; // PENDING, IN_PROGRESS, COMPLETED
 
     @ManyToOne
     @JoinColumn(name = "owner_id")

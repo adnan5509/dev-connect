@@ -16,10 +16,10 @@ VALUES
     (4, 'ROLE_TASK_ASSIGNEE');
 
 -- Insert Projects
-INSERT INTO projects (name, description, owner_id)
+INSERT INTO projects (name, description, owner_id, status)
 VALUES
-    ('Project Alpha', 'A high-performance project.', 1),
-    ('Project Beta', 'A machine learning project.', 2);
+    ('Project Alpha', 'A high-performance project.', 1, 'IN_PROGRESS'),
+    ('Project Beta', 'A machine learning project.', 2, 'COMPLETED');
 
 -- Insert Tasks
 INSERT INTO tasks (title, description, status, project_id, assigned_to)

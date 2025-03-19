@@ -19,6 +19,10 @@ import org.springframework.security.core.GrantedAuthority;
 @AllArgsConstructor
 public class Authority implements GrantedAuthority {
 
+    public Authority(String authority) {
+        this.authority = authority;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
