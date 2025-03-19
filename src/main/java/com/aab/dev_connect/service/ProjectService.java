@@ -3,11 +3,14 @@ package com.aab.dev_connect.service;
 
 import com.aab.dev_connect.dto.ProjectRequestDataType;
 import com.aab.dev_connect.dto.ProjectResponseDataType;
+import com.aab.dev_connect.enums.ProjectStatus;
 import com.aab.dev_connect.exception.ResourceNotFoundException;
 import com.aab.dev_connect.mapper.ProjectMapper;
 import com.aab.dev_connect.model.Project;
 import com.aab.dev_connect.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProjectService {
@@ -40,6 +43,18 @@ public class ProjectService {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         project.setName(projectRequestData.getName());
         project.setDescription(projectRequestData.getDescription());
+        Project updatedProject = projectRepository.save(project);
+        return projectMapper.ProjectToProjectResponseDataType(updatedProject);
+    }
+
+    public List<ProjectResponseDataType> getProjectsByUserId(final Long userId) {
+        List<Project> projects = projectRepository.findByOwnerId(userId);
+        return projectMapper.ProjectsToProjectResponseDataTypes(projects);
+    }
+
+    public ProjectResponseDataType updateProjectStatus(final Long id, final String status) {
+        Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        project.setStatus(ProjectStatus.valueOf(status));
         Project updatedProject = projectRepository.save(project);
         return projectMapper.ProjectToProjectResponseDataType(updatedProject);
     }

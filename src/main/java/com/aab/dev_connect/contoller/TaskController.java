@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/tasks")
 @Tag(name = "Task API", description = "Operations related to Tasks")
@@ -82,6 +84,26 @@ public class TaskController {
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedTask);
 
+    }
+
+    @Operation(
+            summary = "Get all tasks of a user",
+            description = "Retrieves all tasks of a user identified by the given userId."
+    )
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TaskResponseDataType>> getTasksByUserId(@PathVariable Long userId) {
+        List<TaskResponseDataType> tasks = taskService.getTasksByUserId(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(tasks);
+    }
+
+    @Operation(
+            summary = "Get all tasks of a project",
+            description = "Retrieves all tasks of a project identified by the given projectId."
+    )
+    @GetMapping("/project/{projectId}")
+    public ResponseEntity<List<TaskResponseDataType>> getTasksByProjectId(@PathVariable Long projectId) {
+        List<TaskResponseDataType> tasks = taskService.getTasksByProjectId(projectId);
+        return ResponseEntity.status(HttpStatus.OK).body(tasks);
     }
 
 }

@@ -19,5 +19,6 @@ public class ProjectForTaskDataType {
     private String description;
 
     private Long ownerId;
+    private String status;
 
 }

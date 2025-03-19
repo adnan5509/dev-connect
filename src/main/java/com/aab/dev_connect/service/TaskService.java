@@ -7,19 +7,25 @@ import com.aab.dev_connect.enums.TaskStatus;
 import com.aab.dev_connect.exception.ResourceNotFoundException;
 import com.aab.dev_connect.mapper.TaskMapper;
 import com.aab.dev_connect.model.Task;
+import com.aab.dev_connect.model.User;
 import com.aab.dev_connect.repository.TaskRepository;
+import com.aab.dev_connect.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private UserRepository userRepository;
 
     private TaskMapper taskMapper;
 
 
-    public TaskService(final TaskRepository taskRepository, final TaskMapper taskMapper) {
+    public TaskService(final TaskRepository taskRepository, final UserRepository userRepository, final TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
         this.taskMapper = taskMapper;
     }
 
@@ -62,5 +68,18 @@ public class TaskService {
         TaskResponseDataType taskResponseDataType = taskMapper.TaskToTaskResponseDataType(updatedTask);
         return taskResponseDataType;
 
+    }
+
+    public List<TaskResponseDataType> getTasksByUserId(final Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        List<Task> tasks = taskRepository.findByAssignedTo(user);
+        List<TaskResponseDataType> taskResponseDataTypes = taskMapper.TasksToTaskResponseDataTypes(tasks);
+        return taskResponseDataTypes;
+    }
+
+    public List<TaskResponseDataType> getTasksByProjectId(final Long projectId) {
+        List<Task> tasks = taskRepository.findByProjectId(projectId);
+        List<TaskResponseDataType> taskResponseDataTypes = taskMapper.TasksToTaskResponseDataTypes(tasks);
+        return taskResponseDataTypes;
     }
 }

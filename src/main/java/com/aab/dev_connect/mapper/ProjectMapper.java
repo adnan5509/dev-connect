@@ -25,6 +25,9 @@ public interface ProjectMapper {
     @Mapping(target = "ownerId", source = "owner.id")
     ProjectResponseDataType ProjectToProjectResponseDataType(Project project);
 
+    List<ProjectResponseDataType> ProjectsToProjectResponseDataTypes(List<Project> project);
+
+
     TaskForProjectDataType TaskToTaskForProjectDataType(Task task);
 
     List<TaskForProjectDataType> TasksToTaskForProjectDataTypes(List<Task> tasks);

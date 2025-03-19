@@ -46,7 +46,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Project> projects;
 
-    @OneToMany(mappedBy = "assigned_to", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignedTo", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
