@@ -10,7 +10,7 @@ import { Project } from '../model/project';
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css'],
-  imports: [MatCardModule, MatChipsModule, MatProgressBarModule],
+
 })
 export class ProjectListComponent {
 
