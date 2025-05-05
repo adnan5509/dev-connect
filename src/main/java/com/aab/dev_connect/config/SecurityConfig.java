@@ -47,8 +47,8 @@ public class SecurityConfig {
 
                         // All other requests require authentication (GENERAL RULE LAST)
                         .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())  // Only if using form-based auth
-                .logout(LogoutConfigurer::permitAll) // Only if using form-based auth
+                .formLogin(login -> login.permitAll()) // Only if using form-based auth
+                .logout(logout -> logout.permitAll()) // Only if using form-based auth
                 .userDetailsService(userService); // Ensure this is properly configured
 
         return httpSecurity.build();
