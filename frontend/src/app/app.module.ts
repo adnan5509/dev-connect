@@ -7,6 +7,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { ProjectDetailsCardComponent } from './project-details-card/project-details-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProjectDetailsCardComponent } from './project-details-card/project-deta
     BrowserModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
