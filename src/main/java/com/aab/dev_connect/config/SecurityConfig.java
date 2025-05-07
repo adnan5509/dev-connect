@@ -1,71 +1,58 @@
 package com.aab.dev_connect.config;
 
+import com.aab.dev_connect.filter.JwtAuthenticationFilter;
 import com.aab.dev_connect.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-@EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    UserService userService;
-
-    public SecurityConfig(final UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
+    private final JwtAuthenticationFilter jwtAuthFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless APIs
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // Endpoints (STRICTER RULES FIRST)
-                        .requestMatchers(HttpMethod.DELETE, "/api/tasks/*").hasRole("PROJECT_ADMIN") // Delete task
-                        .requestMatchers(HttpMethod.POST, "/api/tasks").hasAnyRole("PROJECT_ADMIN") // Create task
-                        .requestMatchers(HttpMethod.GET, "/api/tasks/*").hasAnyRole("TASK_ASSIGNEE", "PROJECT_ADMIN") // View task
-                        .requestMatchers(HttpMethod.PUT, "/api/tasks/*").hasAnyRole("TASK_ASSIGNEE", "PROJECT_ADMIN") // Update task
+                        .requestMatchers("/user/register", "/user/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasAnyRole("PROJECT_ADMIN", "TASK_ASSIGNEE")
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-                        .requestMatchers(HttpMethod.POST, "/api/projects").hasRole("PROJECT_ADMIN") // Create project
-                        .requestMatchers(HttpMethod.PUT, "/api/projects/*").hasRole("PROJECT_ADMIN") // Update project
-                        .requestMatchers(HttpMethod.DELETE, "/api/projects/*").hasRole("PROJECT_ADMIN") // Delete project
-                        .requestMatchers(HttpMethod.GET, "/api/projects/*").hasRole("PROJECT_ADMIN") // View project
-                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll() // Register user
-
-//                        .requestMatchers(HttpMethod.GET, "/api/projects/**").hasRole("PROJECT_ADMIN") // View task
-//                        .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasRole("TASK_ASSIGNEE") // View task
-
-                        // All other requests require authentication (GENERAL RULE LAST)
-                        .anyRequest().authenticated())
-                .formLogin(login -> login.permitAll()) // Only if using form-based auth
-                .logout(logout -> logout.permitAll()) // Only if using form-based auth
-                .userDetailsService(userService); // Ensure this is properly configured
-
-        return httpSecurity.build();
+        return http.build();
     }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }
