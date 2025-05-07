@@ -18,9 +18,6 @@ export class AuthService {
   }
 
   signup(userRegisterRequest: UserRegisterRequest) {
-    return this.httpClient.post('http://localhost:8080/user/signup', {
-      userRegisterRequest: userRegisterRequest
-    });
-
+    return this.httpClient.post('http://localhost:8080/user/signup', userRegisterRequest);
   }
 }
