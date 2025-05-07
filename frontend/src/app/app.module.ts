@@ -16,6 +16,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './auth/signup/signup.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProjectDetailsCardComponent,
     AuthComponent,
     LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     RouterModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,     // Add MatSelectModule here
+    MatOptionModule,     // Add MatOptionModule here
   ],
   providers: [],
   bootstrap: [AppComponent]

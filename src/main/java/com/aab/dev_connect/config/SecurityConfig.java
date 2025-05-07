@@ -26,10 +26,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/register", "/user/login").permitAll()
+                        .requestMatchers("/user/signup", "/user/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasAnyRole("PROJECT_ADMIN", "TASK_ASSIGNEE")
                         .anyRequest().authenticated()
                 )

@@ -1,4 +1,4 @@
-package com.aab.dev_connect.controller;
+package com.aab.dev_connect.contoller;
 
 import com.aab.dev_connect.dto.JwtResponse;
 import com.aab.dev_connect.dto.LoginRequest;
@@ -47,8 +47,8 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<UserRegistrationResponse> registerNewUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
-        UserRegistrationResponse userRegistrationResponse = userService.registerNewUser(userRegistrationRequest);
+    public ResponseEntity<UserRegistrationResponse> registerNewUser(@RequestBody UserRegistrationRequest userRegisterRequest) {
+        UserRegistrationResponse userRegistrationResponse = userService.registerNewUser(userRegisterRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(userRegistrationResponse);
     }
 }
