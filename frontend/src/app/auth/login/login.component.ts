@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { UserLoginResponse } from 'src/app/model/user-login-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -26,12 +28,15 @@ export class LoginComponent implements OnInit {
       const password = this.loginForm.value.password;
 
       this.authService.login(email, password).subscribe(
-        resposeData => {
-          console.log(resposeData)
-        },
-        error => {
-          console.log(error)
+        {
+          next: (responseData: UserLoginResponse) => {
+            localStorage.setItem('token', responseData.token);
+            localStorage.setItem('logged-in-user', JSON.stringify(responseData))
+            this.router.navigate(['dashboard']);
+          },
+          error: (error) => console.log(error)
         }
+
       );
     }
   }

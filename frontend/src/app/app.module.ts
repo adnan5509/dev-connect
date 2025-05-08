@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './auth/signup/signup.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
     AuthComponent,
     LoginComponent,
     SignupComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
