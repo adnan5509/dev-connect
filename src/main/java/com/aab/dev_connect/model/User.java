@@ -59,6 +59,17 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
+    public User(final Long id, final String username, final String password, final List<Authority> authorities,
+                final String email, final String bio, final String githubUrl){
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+        this.email = email;
+        this.bio = bio;
+        this.githubUrl = githubUrl;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

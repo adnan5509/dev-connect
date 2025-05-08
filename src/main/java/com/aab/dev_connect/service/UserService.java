@@ -26,23 +26,23 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(final String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
 
-        // Debugging roles
-        System.out.println("User: " + user.getUsername());
-        user.getAuthorities().forEach(role -> System.out.println("ROLE: " + role.getAuthority()));
-
+        // Map the User entity to UserDetails
         List<Authority> authorities = user.getAuthorities().stream()
                 .map(role -> new Authority(role.getAuthority())) // Ensure roles are correctly mapped
                 .collect(Collectors.toList());
 
         return new User(
                 user.getId(),
-                user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
-                authorities
+                authorities,
+                user.getEmail(),
+                user.getBio(),
+                user.getGithubUrl()
         );
     }
 
