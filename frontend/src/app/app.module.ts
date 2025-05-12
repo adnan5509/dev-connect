@@ -20,6 +20,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardCardComponent } from './dashboard/dashboard-card/dashboard-card.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
     LoginComponent,
     SignupComponent,
     DashboardComponent,
+    DashboardCardComponent,
   ],
   imports: [
     BrowserModule,

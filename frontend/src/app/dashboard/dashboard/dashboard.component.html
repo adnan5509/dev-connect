@@ -1,1 +1,5 @@
-<p>dashboard works!</p>
+<div class="dashboard-cards" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-around center">
+    <app-dashboard-card dashboardCardTitle="Total Projects" [dashboardCardValue]="totalProjects"></app-dashboard-card>
+    <app-dashboard-card dashboardCardTitle="Total Tasks" [dashboardCardValue]="totalTasks"></app-dashboard-card>
+    <app-dashboard-card dashboardCardTitle="Completed Tasks" [dashboardCardValue]="completedTasks"></app-dashboard-card>
+</div>

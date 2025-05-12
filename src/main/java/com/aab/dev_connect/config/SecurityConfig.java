@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/signup", "/user/login").permitAll()
+                        .requestMatchers("/user/signup", "/user/login",  "/dashboard/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasAnyRole("PROJECT_ADMIN", "TASK_ASSIGNEE")
                         .anyRequest().authenticated()
                 )
