@@ -1,0 +1,13 @@
+.sidenav {
+    width: 250px;
+    background-color: #0f3b5f;
+    color: white;
+    padding: 20px;
+  }
+  
+  .sidenav .logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  

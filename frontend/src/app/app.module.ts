@@ -16,11 +16,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { SignupComponent } from './auth/signup/signup.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { DashboardCardComponent } from './dashboard/dashboard-card/dashboard-card.component';
+import { SideBarNavComponent } from './sidebar/side-bar-nav/side-bar-nav.component';
 
 @NgModule({
   declarations: [
@@ -32,21 +38,27 @@ import { DashboardCardComponent } from './dashboard/dashboard-card/dashboard-car
     SignupComponent,
     DashboardComponent,
     DashboardCardComponent,
+    SideBarNavComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatCardModule,
     MatChipsModule,
     MatInputModule,
-    MatButtonModule,
     MatFormFieldModule,
     HttpClientModule,
     RouterModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     MatSelectModule,     // Add MatSelectModule here
-    MatOptionModule,     // Add MatOptionModule here
+    MatOptionModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule   // Add MatOptionModule here
   ],
   providers: [],
   bootstrap: [AppComponent]
